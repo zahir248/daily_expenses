@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextField(
                   controller: usernameController,
                   decoration: const InputDecoration(
-                    labelText: 'Username',
+                    labelText: 'Username (123)',
                   ),
                 ),
               ),
@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   controller: passwordController,
                   obscureText: true, // Hide the password
                   decoration: const InputDecoration(
-                    labelText: 'Password',
+                    labelText: 'Password (123)',
                   ),
                 ),
               ),
@@ -75,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   String apiAddress = apiAddressController.text;
 
                   // Validate username and password
-                  if (username == 'zahir' && password == 'zahir') {
+                  if (username == '123' && password == '123') {
                     // Save API address to SharedPreferences
                     saveApiAddress(apiAddress);
 
