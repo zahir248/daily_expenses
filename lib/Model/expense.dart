@@ -11,16 +11,16 @@ class Expense {
   Expense(this.amount, this.desc, this.dateTime);
 
   Expense.fromJson(Map<String, dynamic> json)
-      : desc = json['Desc'] as String? ?? '',
-        amount = json['Amount'] != null
-            ? (json['Amount'] is String
-            ? double.tryParse(json['Amount']) ?? 0.0
-            : json['Amount'].toDouble())
+      : desc = json['desc'] as String? ?? '',
+        amount = json['amount'] != null
+            ? (json['amount'] is String
+            ? double.tryParse(json['amount']) ?? 0.0
+            : json['amount'].toDouble())
             : 0.0,
         dateTime = json['dateTime'] as String? ?? '';
 
   // toJson will be automatically called by jsonEncode when necessary
-  Map<String, dynamic> toJson() => {'Desc': desc, 'Amount': amount, 'dateTime': dateTime};
+  Map<String, dynamic> toJson() => {'desc': desc, 'amount': amount, 'dateTime': dateTime};
 
   Future<bool> save() async {
     // Retrieve API address from SharedPreferences
