@@ -9,14 +9,14 @@ class RequestController {
   final Map<String, String> _headers = {};
   dynamic _resultData;
 
-  RequestController({required this.path, this.server = "http://10.200.91.133"});
-
+  RequestController({required this.path, required this.server});
 
   setBody(Map<String, dynamic> data) {
     _body.clear();
     _body.addAll(data);
     _headers["Content-Type"] = "application/json; charset=UTF-8";
   }
+
   Future<void> post() async {
     _res = await http.post(
       Uri.parse(server + path),
@@ -25,6 +25,7 @@ class RequestController {
     );
     _parseResult();
   }
+
   Future<void> get() async {
     _res = await http.get(
       Uri.parse(server + path),
@@ -33,19 +34,21 @@ class RequestController {
     _parseResult();
   }
 
-  void _parseResult(){
-    try{
+  void _parseResult() {
+    try {
       print("raw response:${_res?.body}");
-      _resultData = jsonDecode(_res?.body?? "");
-    }catch(ex){
-      // otherwise the response body will be stored as is
+      _resultData = jsonDecode(_res?.body ?? "");
+    } catch (ex) {
+      // otherwise, the response body will be stored as is
       _resultData = _res?.body;
       print("exception in http result parsing ${ex}");
     }
   }
-  dynamic result(){
+
+  dynamic result() {
     return _resultData;
   }
+
   int status() {
     return _res?.statusCode ?? 0;
   }

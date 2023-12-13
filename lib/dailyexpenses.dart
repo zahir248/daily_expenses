@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
 import '../Model/expense.dart';
+import '../Controller/request_controller.dart';
 
 class DailyExpensesApp extends StatelessWidget {
+
+  final String username;
+
+  const DailyExpensesApp({required this.username});
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ExpenseList(),
+      home: ExpenseList(username: username),
     );
   }
 }
 
 class ExpenseList extends StatefulWidget {
+
+  final String username; // Add this line
+
+  ExpenseList({required this.username}); // Add this line
+
   @override
   _ExpenseListState createState() => _ExpenseListState();
 }
 
 class _ExpenseListState extends State<ExpenseList> {
+
+
   final List<Expense> expenses = [];
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
@@ -110,10 +124,17 @@ class _ExpenseListState extends State<ExpenseList> {
   void initState() {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
-      // Commented out the following line as there is no 'username' property
-      // _showMessage("Welcome ${widget.username}");
+       _showMessage("Welcome ${widget.username}");
 
-      // ... other code
+      RequestController req = RequestController(
+        path: "/api/timezone/Asia/Kuala_Lumpur",
+        server: "http://worldtimeapi.org");
+      req.get().then((value) {
+        dynamic res = req.result();
+        txtDateController.text =
+            res["datetime"].toString().substring(0,19).replaceAll('T', ' ');
+        });
+      expenses.addAll(await Expense.loadAll());
 
       setState(() {
         calculateTotal();
@@ -325,7 +346,5 @@ class _EditExpenseScreenState extends State<EditExpenseScreen> {
 }
 
 void main() {
-  runApp(MaterialApp(
-    home: DailyExpensesApp(),
-  ));
+  runApp(DailyExpensesApp(username: 'zahir'));
 }

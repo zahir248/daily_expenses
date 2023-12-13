@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dailyexpenses.dart';
 
-void main(){
-  runApp(DailyExpensesApp());
+void main() {
+  String username = 'zahir'; // Replace with the actual username
+  runApp(DailyExpensesApp(username: username));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
