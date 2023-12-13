@@ -267,6 +267,7 @@ class _EditExpenseScreenState extends State<EditExpenseScreen> {
     super.initState();
     descController.text = widget.expense.desc;
     amountController.text = widget.expense.amount.toString();
+    dateController.text = widget.expense.dateTime;
   }
 
   _selectDate() async {
