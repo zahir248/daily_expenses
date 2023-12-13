@@ -63,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: TextField(
                   controller: apiAddressController,
                   decoration: const InputDecoration(
-                    labelText: 'REST API address',
+                    labelText: 'REST API address (http://)',
                   ),
                 ),
               ),
